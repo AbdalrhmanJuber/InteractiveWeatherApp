@@ -3,6 +3,10 @@
 A simple interactive weather application that lets a user enter a city name, fetches current weather data from a public API, and displays key details (temperature, description, humidity).  
 The project focuses on practicing asynchronous JavaScript patterns with `fetch`, `Promises`, and `async/await`, along with DOM manipulation and modern ES6+ syntax.
 
+
+https://github.com/user-attachments/assets/4079f10f-d6ee-4055-b0ef-0e1dfa317e54
+
+
 ## Technologies Covered
 - Asynchronous Programming (`fetch`, `async/await`)
 - Promises
@@ -31,103 +35,6 @@ Sign up at [OpenWeatherMap](https://openweathermap.org/api) (or another weather 
   script.js
   styles.css
   README.md
-```
-
-### 3. Example `index.html`
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Interactive Weather App</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <h1>Weather App</h1>
-  <form id="weather-form">
-    <input id="city-input" type="text" placeholder="Enter city" required />
-    <button type="submit">Get Weather</button>
-  </form>
-  <div id="result"></div>
-  <script src="script.js"></script>
-</body>
-</html>
-```
-
-### 4. Example `script.js`
-```javascript
-const form = document.getElementById('weather-form');
-const cityInput = document.getElementById('city-input');
-const resultDiv = document.getElementById('result');
-
-const API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your key
-const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const city = cityInput.value.trim();
-  if (!city) return;
-
-  resultDiv.textContent = 'Loading...';
-
-  try {
-    const url = `${BASE_URL}?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`;
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error('City not found.');
-    }
-
-    const data = await response.json();
-
-    const { main, weather, name } = data;
-    const temperature = main.temp.toFixed(1);
-    const description = weather[0].description;
-    const humidity = main.humidity;
-
-    resultDiv.innerHTML = `
-      <h2>${name}</h2>
-      <p><strong>Temperature:</strong> ${temperature} °C</p>
-      <p><strong>Condition:</strong> ${description}</p>
-      <p><strong>Humidity:</strong> ${humidity}%</p>
-    `;
-  } catch (err) {
-    resultDiv.textContent = `Error: ${err.message}`;
-  }
-});
-```
-
-### 5. Example `styles.css`
-```css
-body {
-  font-family: system-ui, Arial, sans-serif;
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  line-height: 1.5;
-}
-
-h1 {
-  text-align: center;
-}
-
-form {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-input {
-  flex: 1;
-  padding: 0.5rem;
-}
-
-#result {
-  background: #f5f5f5;
-  padding: 1rem;
-  border-radius: 6px;
-  min-height: 50px;
-}
 ```
 
 ## How It Works
